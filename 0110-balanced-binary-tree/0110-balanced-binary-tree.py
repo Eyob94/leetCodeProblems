@@ -1,16 +1,22 @@
 class Solution:
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
-        def checkBalance(node):
-            if not node:
-                return 0, True
+        def checkBalance(root):
+            if not root:
+                return [True, 0]
             
-            left_height, left_balanced = checkBalance(node.left)
-            right_height, right_balanced = checkBalance(node.right)
-            
-            height = max(left_height, right_height) + 1
-            balanced = left_balanced and right_balanced and abs(left_height - right_height) <= 1
-            
-            return height, balanced
-        
-        _, balanced = checkBalance(root)
+            [leftBalanced, leftHeight] = checkBalance(root.left)
+            [rightBalanced, rightHeight] = checkBalance(root.right)
+
+            height = max(leftHeight, rightHeight) + 1
+            balanced = leftBalanced and rightBalanced and abs(leftHeight-rightHeight) <= 1
+
+            return [balanced, height]
+
+        balanced, height = checkBalance(root)
+
         return balanced
+
+            
+
+
+
