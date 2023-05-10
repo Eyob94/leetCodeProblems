@@ -1,17 +1,14 @@
 class Solution:      
 
-    def minCostClimbingStairs(self, cost: List[int], memo={}) -> int:
-        if tuple(cost) in memo:
-            return memo[tuple(cost)]
-        if len(cost) <= 1:
-            return 0
-        
-        cost1 = cost[0] + self.minCostClimbingStairs(cost[1:], memo)
-        cost2 = cost[1] + self.minCostClimbingStairs(cost[2:], memo)
+    def minCostClimbingStairs(self, cost: List[int]) -> int:
+        cost.append(0)
+        cost.append(0)
 
-        memo[tuple(cost)] = min(cost1, cost2)
 
-        return memo[tuple(cost)]
+        for i in range(len(cost)-3, -1, -1):
+            cost[i] += min(cost[i+1], cost[i+2])
+
+        return min(cost[0], cost[1])
 
 
         
