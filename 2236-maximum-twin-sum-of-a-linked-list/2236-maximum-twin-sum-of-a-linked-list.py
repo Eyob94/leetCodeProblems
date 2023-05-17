@@ -7,18 +7,29 @@ class Solution:
     def pairSum(self, head: Optional[ListNode]) -> int:
         arr = []
 
-        while head:
-            arr.append(head.val)
-            head = head.next
+        slow = fast = head
+        prev = None
+
+        while fast and fast.next:
+            fast = fast.next.next
+
+            temp = slow.next
+
+            slow.next = prev
+
+            prev = slow
+
+            slow = temp
+
+        res = 0
+        while slow:
+            res = max(res, slow.val+prev.val)
+            slow = slow.next
+            prev=prev.next
+
+        return res
+
+
+
         
-        i, j = 0, len(arr)-1
-        Max = 0
-
-        while i < j:
-            pair = arr[i] + arr[j]
-            Max = max(Max, pair)
-            i+=1
-            j-=1
-
-        return Max
 
