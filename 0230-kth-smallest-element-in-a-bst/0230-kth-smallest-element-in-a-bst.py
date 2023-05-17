@@ -18,9 +18,10 @@ class Solution:
             
             current = stack.pop()
             res.append(current.val)
+            k-=1
+            if k == 0:
+                return res[-1]
 
             current = current.right
         
-        
-
-        return res[k-1]
+    
