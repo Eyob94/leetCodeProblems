@@ -12,8 +12,10 @@ class Solution:
 
         for i in range(len(nums)):
             out[i] *= left
-            out[-1-i] *= right
             left *= nums[i]
-            right *= nums[-1-i]
+
+        for i in range(len(nums)-1, -1, -1):
+            out[i] *= right
+            right *= nums[i]
         
         return out
