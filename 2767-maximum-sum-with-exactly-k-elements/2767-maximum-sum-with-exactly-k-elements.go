@@ -1,10 +1,16 @@
-import "sort"
+
 func maximizeSum(nums []int, k int) int {
     out:=0
-    sort.Ints(nums)
+    max := 0 
+    for _, v:=range nums{
+        if v > max{
+            max = v
+        }
+    }
     for k >0{
-        out += nums[len(nums)-1]
-        nums[len(nums)-1]++
+        out += max
+        max++
+        nums[len(nums)-1] = max
         k--
     }
 
