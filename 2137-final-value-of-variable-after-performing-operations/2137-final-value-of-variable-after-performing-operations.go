@@ -1,12 +1,13 @@
-import "strings"
+
 func finalValueAfterOperations(operations []string) int {
     x:=0
     for _, v := range operations{
-        if strings.Contains(v, "-"){
+        r := []rune(v)
+        if r[0]=='-' || r[len(r)-1] == '-'{
             x--
-        }else {
-            x++
+            continue
         }
+            x++
     }
 
     return x
